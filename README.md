@@ -41,15 +41,7 @@ graph TD
     B --> D[Mutations]
     B --> E[Subscriptions]
     B --> F[Resolvers]
-    A --> G[Benefits over REST]
-    G --> H[Efficient Data Fetching]
-    G --> I[Strongly Typed Schema]
-    G --> J[Real-time Data]
-    G --> K[Reduced Overfetching]
 
-    %% Styling for benefit nodes
-    classDef benefit fill:#d4f7dc,stroke:#2e7d32,stroke-width:1px;
-    class G,H,I,J,K benefit;
 
 
 %% Define a custom style for benefits
@@ -71,3 +63,35 @@ graph TD
         G4[✅ Reduced Overfetching]
     end
 ```
+
+
+## ✅ Efficient Data Fetching
+- **Definition**: The ability to request exactly the data you need in a single query.
+- **Focus**: Precision and performance.
+- **Example**: Requesting just a user's `name` and `email` without retrieving their entire profile.
+- **Why it Matters**: Reduces the number of requests and the size of responses, improving speed and reducing bandwidth usage.
+
+---
+
+## 📉 Reduced Overfetching
+- **Definition**: Avoiding the retrieval of unnecessary data.
+- **Focus**: Minimizing waste.
+- **Example**: In REST, an endpoint like `/users/123` might return the full user object, including fields you don’t need (e.g., `address`, `preferences`, `lastLogin`).
+- **Why it Matters**: Prevents clients from receiving and processing data they don’t use, which can slow down apps and waste resources.
+
+---
+
+## 🔒 Strongly Typed Schema
+- **Definition**: GraphQL schemas are strongly typed, meaning each field has a specific type.
+- **Focus**: Ensuring data consistency and validation.
+- **Example**: A schema defines a `User` type with fields like `id`, `name`, and `email`, each with a defined type.
+- **Why it Matters**: Helps catch errors early and ensures that clients and servers agree on the data format.
+
+---
+
+## 🔄 Real-time Data
+- **Definition**: GraphQL supports real-time data updates via subscriptions.
+- **Focus**: Providing live updates to clients.
+- **Example**: A subscription to a chat application that pushes new messages to clients in real-time.
+- **Why it Matters**: Allows applications to react to changes in data without polling, improving user experience.
+
