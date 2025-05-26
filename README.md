@@ -139,3 +139,55 @@ type User {
 - id: must be a non-null ID <br>
 - name: must be a non-null String <br>
 - age: is an optional Int <br>
+
+
+---
+
+# 🎬 Understanding GraphQL
+## 🕹️ PROGRAM 1
+```javascript
+const { ApolloServer, gql } = require('apollo-server');
+
+// Define the GraphQL schema
+const typeDefs = gql`
+  type Book {
+    title: String
+    author: String
+  }
+
+  type Query {
+    books: [Book]
+  }
+`;
+
+// Sample data
+const books = [
+  {
+    title: 'The Great Gatsby',
+    author: 'F. Scott Fitzgerald',
+  },
+  {
+    title: 'To Kill a Mockingbird',
+    author: 'Harper Lee',
+  },
+];
+
+// Define resolvers
+const resolvers = {
+  Query: {
+    books: () => books,
+  },
+};
+
+// Create an Apollo Server instance
+const server = new ApolloServer({ typeDefs, resolvers });
+
+// Start the server
+server.listen({ port: 4000 }).then(({ url }) => {
+  console.log(`🚀 Server ready at ${url}`);
+});
+```
+### Install Dependencies
+npm install apollo-server graphql
+### Run Program
+node graphql-1.js
