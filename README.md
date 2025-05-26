@@ -191,3 +191,73 @@ server.listen({ port: 4000 }).then(({ url }) => {
 npm install apollo-server graphql
 ### Run Program
 node graphql-1.js
+
+
+
+
+
+
+
+
+## 🕹️ PROGRAM 2
+```javascript
+const { ApolloServer, gql } = require('apollo-server');
+const fetch = require('node-fetch'); // Import node-fetch for API calls
+
+// Define the GraphQL schema
+const typeDefs = gql`
+  type Book {
+    title: String
+    author: String
+  }
+
+  type Joke {
+    id: Int
+    type: String
+    setup: String
+    punchline: String
+  }
+
+  type Query {
+    books: [Book]
+    joke: Joke
+  }
+`;
+
+// Sample data
+const books = [
+  {
+    title: 'The Great Gatsby',
+    author: 'F. Scott Fitzgerald',
+  },
+  {
+    title: 'To Kill a Mockingbird',
+    author: 'Harper Lee',
+  },
+];
+
+// Define resolvers
+const resolvers = {
+  Query: {
+    books: () => books,
+    joke: async () => {
+      const response = await fetch('https://official-joke-api.appspot.com/random_joke');
+      const joke = await response.json();
+      return joke; // Return the joke object
+    },
+  },
+};
+
+// Create an Apollo Server instance
+const server = new ApolloServer({ typeDefs, resolvers });
+
+// Start the server
+server.listen({ port: 4000 }).then(({ url }) => {
+  console.log(`🚀 Server ready at ${url}`);
+});
+
+```
+### Install Dependencies
+npm install node-fetch
+### Run Program
+node graphql-2.js
