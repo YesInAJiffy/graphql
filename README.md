@@ -500,12 +500,17 @@ query {
 }
 ```
 ## 🕹️ PROGRAM 5
-Seperation of concerns
-To organize your code better, you can separate the typeDefs and resolvers into their own files. Here's how you can do it:
-graphql-sample/
-├── graphql.js
-├── resolvers.js
-├── typeDefs.js
+### Seperation of concerns <br>
+Separation of Concerns (SoC) is a software design principle that promotes dividing a program into distinct sections, where each section addresses a specific concern or responsibility. A "concern" refers to a particular feature, functionality, or behavior of the application.
+<br>
+By separating concerns, you make your code more modular, maintainable, and scalable. Each part of the code focuses on a single responsibility, reducing dependencies and making it easier to understand and modify.
+<br>
+<br>
+To organize your code better, you can separate the typeDefs and resolvers into their own files. Here's how you can do it:<br>
+graphql-sample/<br>
+├── graphql.js<br>
+├── resolvers.js<br>
+├── typeDefs.js<br>
 
 ### typedefs.js
 ```javascript
