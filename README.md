@@ -1,6 +1,3 @@
-# graphql
-
-
 
 # What is GraphQL?
 
@@ -55,7 +52,7 @@ graph TD
 
 ```mermaid
 
-graph TD
+graph TB
     subgraph Benefits_over_REST [Benefits over REST]
         G1[✅ Efficient Data Fetching]
         G2[✅ Strongly Typed Schema]
@@ -63,6 +60,8 @@ graph TD
         G4[✅ Reduced Overfetching]
     end
 ```
+
+
 
 
 ## ✅ Efficient Data Fetching
