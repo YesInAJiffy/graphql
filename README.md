@@ -192,9 +192,16 @@ npm install apollo-server graphql
 ### Run Program
 node graphql-1.js
 
+### Query
 
-
-
+```
+query {
+  books {
+    author
+    title
+  }
+}
+```
 
 
 
@@ -337,7 +344,20 @@ server.listen({ port: 4000 }).then(({ url }) => {
 npm install apollo-server graphql node-fetch
 ### Run Program
 node graphql-3.js
+### Query
 
+```
+query {
+  books {
+    author
+    title
+  }
+  joke {
+    setup
+    punchline
+  }
+}
+```
 
 ## 🕹️ PROGRAM 4
 If you face the certificate issue, you can either provide the API certificate to your application, or put your code behind a proxy like NGINX or API Gateway (the proxy handles the SSL validation. Here I am going to disable the SSL validation. <br>
@@ -423,12 +443,25 @@ server.listen({ port: 4000 }).then(({ url }) => {
 npm install apollo-server graphql node-fetch
 ### Run Program
 node graphql-3.js
-### Input JSON
+### Mutation
 ```
 mutation {
   addBook(title: "1984", author: "George Orwell") {
     title
     author
+  }
+}
+```
+### Query
+```
+query {
+  books {
+    author
+    title
+  }
+  joke {
+    setup
+    punchline
   }
 }
 ```
