@@ -144,6 +144,42 @@ type User {
 ---
 
 # 🎬 Understanding GraphQL
+
+## 🕹️ PROGRAM 0 (Hello World)
+```javascript
+
+const { ApolloServer, gql } = require('apollo-server');
+
+const typeDefs = gql`
+  type Query {
+    hello: String
+  }
+`;
+
+const resolvers = {
+  Query: {
+    hello: () => 'Hello, world!',
+  },
+};
+
+const server = new ApolloServer({ typeDefs, resolvers });
+
+server.listen({ port: 4000 }).then(({ url }) => {
+  console.log(`🚀 Server ready at ${url}`);
+});
+```
+### Install Dependencies
+npm install apollo-server graphql
+### Run Program
+node graphql-1.js
+
+### Query
+```
+query {
+  hello
+}
+```
+
 ## 🕹️ PROGRAM 1
 ```javascript
 const { ApolloServer, gql } = require('apollo-server');
