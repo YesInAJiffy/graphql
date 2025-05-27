@@ -337,3 +337,98 @@ server.listen({ port: 4000 }).then(({ url }) => {
 npm install apollo-server graphql node-fetch
 ### Run Program
 node graphql-3.js
+
+
+## 🕹️ PROGRAM 4
+If you face the certificate issue, you can either provide the API certificate to your application, or put your code behind a proxy like NGINX or API Gateway (the proxy handles the SSL validation. Here I am going to disable the SSL validation. <br>
+Using an https.Agent with rejectUnauthorized: false to bypass SSL validation for the request. Here's the updated code:
+
+
+```javascript
+const { ApolloServer, gql } = require('apollo-server');
+const fetch = require('node-fetch'); // Import node-fetch for API calls
+const https = require('https'); // Import https for custom agent
+
+// Define the GraphQL schema
+const typeDefs = gql`
+  type Book {
+    title: String
+    author: String
+  }
+
+  type Joke {
+    id: Int
+    type: String
+    setup: String
+    punchline: String
+  }
+
+  type Query {
+    books: [Book]
+    joke: Joke
+  }
+
+  type Mutation {
+    addBook(title: String!, author: String!): Book
+  }
+`;
+
+// Sample data
+const books = [
+  {
+    title: 'The Great Gatsby',
+    author: 'F. Scott Fitzgerald',
+  },
+  {
+    title: 'To Kill a Mockingbird',
+    author: 'Harper Lee',
+  },
+];
+
+// Create an HTTPS agent to ignore SSL certificate validation
+const httpsAgent = new https.Agent({
+  rejectUnauthorized: false, // Disable SSL certificate validation
+});
+
+// Define resolvers
+const resolvers = {
+  Query: {
+    books: () => books,
+    joke: async () => {
+      const response = await fetch('https://official-joke-api.appspot.com/random_joke', {
+        agent: httpsAgent, // Use the custom HTTPS agent
+      });
+      const joke = await response.json();
+      return joke; // Return the joke object
+    },
+  },
+  Mutation: {
+    addBook: (_, { title, author }) => {
+      const newBook = { title, author };
+      books.push(newBook); // Add the new book to the array
+      return newBook; // Return the newly added book
+    },
+  },
+};
+
+// Create an Apollo Server instance
+const server = new ApolloServer({ typeDefs, resolvers });
+
+// Start the server
+server.listen({ port: 4000 }).then(({ url }) => {
+  console.log(`🚀 Server ready at ${url}`);
+});
+```
+### Install Dependencies
+npm install apollo-server graphql node-fetch
+### Run Program
+node graphql-3.js
+### Input JSON
+```
+mutation {
+  addBook(title: "1984", author: "George Orwell") {
+    title
+    author
+  }
+}
+```
