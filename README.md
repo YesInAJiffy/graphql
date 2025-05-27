@@ -396,9 +396,7 @@ query {
 ```
 
 ## 🕹️ PROGRAM 4
-If you face the certificate issue, you can either provide the API certificate to your application, or put your code behind a proxy like NGINX or API Gateway (the proxy handles the SSL validation. Here I am going to disable the SSL validation. <br>
-Using an https.Agent with rejectUnauthorized: false to bypass SSL validation for the request. Here's the updated code:
-
+MUTATIONS
 
 ```javascript
 const { ApolloServer, gql } = require('apollo-server');
@@ -466,6 +464,127 @@ const resolvers = {
     },
   },
 };
+
+// Create an Apollo Server instance
+const server = new ApolloServer({ typeDefs, resolvers });
+
+// Start the server
+server.listen({ port: 4000 }).then(({ url }) => {
+  console.log(`🚀 Server ready at ${url}`);
+});
+```
+### Install Dependencies
+npm install apollo-server graphql node-fetch
+### Run Program
+node graphql-3.js
+### Mutation
+```
+mutation {
+  addBook(title: "1984", author: "George Orwell") {
+    title
+    author
+  }
+}
+```
+### Query
+```
+query {
+  books {
+    author
+    title
+  }
+  joke {
+    setup
+    punchline
+  }
+}
+```
+## 🕹️ PROGRAM 5
+Seperation of concerns
+To organize your code better, you can separate the typeDefs and resolvers into their own files. Here's how you can do it:
+graphql-sample/
+├── graphql.js
+├── resolvers.js
+├── typeDefs.js
+
+### typedefs.js
+```javascript
+const { gql } = require('apollo-server');
+
+const typeDefs = gql`
+  type Book {
+    title: String
+    author: String
+  }
+
+  type Joke {
+    id: Int
+    type: String
+    setup: String
+    punchline: String
+  }
+
+  type Query {
+    books: [Book]
+    joke: Joke
+  }
+
+  type Mutation {
+    addBook(title: String!, author: String!): Book
+  }
+`;
+
+module.exports = typeDefs;
+```
+### resolvers.js
+```javascript
+const fetch = require('node-fetch');
+const https = require('https');
+
+// Sample data
+const books = [
+  {
+    title: 'The Great Gatsby',
+    author: 'F. Scott Fitzgerald',
+  },
+  {
+    title: 'To Kill a Mockingbird',
+    author: 'Harper Lee',
+  },
+];
+
+// Create an HTTPS agent to ignore SSL certificate validation
+const httpsAgent = new https.Agent({
+  rejectUnauthorized: false, // Disable SSL certificate validation
+});
+
+const resolvers = {
+  Query: {
+    books: () => books,
+    joke: async () => {
+      const response = await fetch('https://official-joke-api.appspot.com/random_joke', {
+        agent: httpsAgent, // Use the custom HTTPS agent
+      });
+      const joke = await response.json();
+      return joke; // Return the joke object
+    },
+  },
+  Mutation: {
+    addBook: (_, { title, author }) => {
+      const newBook = { title, author };
+      books.push(newBook); // Add the new book to the array
+      return newBook; // Return the newly added book
+    },
+  },
+};
+
+module.exports = resolvers;
+```
+### graphql.js
+```javascript
+const { ApolloServer } = require('apollo-server');
+const typeDefs = require('./typeDefs'); // Import typeDefs
+const resolvers = require('./resolvers'); // Import resolvers
 
 // Create an Apollo Server instance
 const server = new ApolloServer({ typeDefs, resolvers });
