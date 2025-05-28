@@ -97,31 +97,6 @@ graph TB
 <br>
 <br>
 
-# APPENDIX
-
-# 📘 What Does "Strongly Typed Definitions" Mean?
-
-In programming, **strongly typed definitions** refer to a system where **every variable and expression has a clearly defined type**, and the language **strictly enforces** how those types are used.
-
----
-
-## 🔍 In the Context of GraphQL
-
-GraphQL is **strongly typed** because its schema defines **explicit types** for all data structures. This includes:
-
-- **Scalar types** like `String`, `Int`, `Boolean`
-- **Custom object types** like `User`, `Post`
-- **Input types** for mutations
-- **Return types** for queries and mutations
-
----
-
-## ✅ Benefits of Strong Typing in GraphQL
-
-- **Validation**: Queries can be checked for correctness before execution.
-- **Autocompletion**: Developer tools can suggest fields and types.
-- **Documentation**: The schema serves as a self-documenting contract.
-- **Error Prevention**: Type mismatches are caught early, reducing bugs.
 
 ---
 
@@ -624,3 +599,31 @@ query {
   }
 }
 ```
+
+---
+# APPENDIX
+
+# 📘 What Does "Strongly Typed Definitions" Mean?
+
+In programming, **strongly typed definitions** refer to a system where **every variable and expression has a clearly defined type**, and the language **strictly enforces** how those types are used.
+
+---
+
+## 🔍 In the Context of GraphQL
+
+GraphQL is **strongly typed** because its schema defines **explicit types** for all data structures. This includes:
+
+- **Scalar types** like `String`, `Int`, `Boolean`
+- **Custom object types** like `User`, `Post`
+- **Input types** for mutations
+- **Return types** for queries and mutations
+
+---
+
+## ✅ Benefits of Strong Typing in GraphQL
+
+- **Validation**: Queries can be checked for correctness before execution.
+- **Autocompletion**: Developer tools can suggest fields and types.
+- **Documentation**: The schema serves as a self-documenting contract.
+- **Error Prevention**: Type mismatches are caught early, reducing bugs.
+
