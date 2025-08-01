@@ -97,7 +97,25 @@ graph TB
 <br>
 <br>
 
+## Apollo Server
+Apollo Server is an open-source, community-driven GraphQL server that allows you to build a GraphQL API quickly and efficiently. 
+#### GraphQL Schema Definition:
+You define your API's schema using the typeDefs (GraphQL SDL - Schema Definition Language).
+#### Resolvers:
+Resolvers contain the logic for fetching data and responding to queries or mutations.
 
+```mermaid
+sequenceDiagram
+    participant Client
+    participant ApolloServer
+    participant Resolver
+
+    Client->>ApolloServer: Query { hello }
+    ApolloServer->>Resolver: Execute hello resolver
+    Resolver-->>ApolloServer: Return "Hello, world!"
+    ApolloServer-->>Client: Response { "data": { "hello": "Hello, world!" } }
+
+```
 ---
 
 ## 🧠 Example
