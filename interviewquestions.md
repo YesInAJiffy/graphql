@@ -45,7 +45,7 @@ JavaScript has:
 
 **Example:**
 ```javascript
-let name = "Lalit";       // String
+let name = "Kabir";       // String
 let age = 35;             // Number
 let isManager = true;     // Boolean
 let salary = null;        // Null
@@ -177,12 +177,12 @@ console.log("End");
 **Example:**
 ```javascript
 const person = {
-  name: "Lalit",
+  name: "Kabir",
   greet() {
     console.log("Hello, " + this.name);
   }
 };
-person.greet(); // Hello, Lalit
+person.greet(); // Hello, Kabir
 ```
 
 ---
@@ -193,8 +193,8 @@ Template literals use backticks and `${}` for interpolation.
 
 **Example:**
 ```javascript
-let name = "Lalit";
-console.log(`Hello, ${name}!`); // Hello, Lalit!
+let name = "Kabir";
+console.log(`Hello, ${name}!`); // Hello, Kabir!
 ```
 
 ---
