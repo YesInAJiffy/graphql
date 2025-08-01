@@ -314,4 +314,232 @@ app.get('/', (req, res) => res.send('Hello World'));
 
 ---
 
-Would you like me to turn this into a formatted HTML or Markdown file for sharing or documentation?
+
+
+Here’s a list of **JavaScript programming questions** you can ask candidates during interviews. These range from basic to intermediate and are designed to test problem-solving, understanding of core concepts, and coding style.
+
+---
+
+## 🟦 **Basic Programming Questions**
+
+1. **Reverse a string**
+   - *Write a function to reverse a given string.*
+   ```javascript
+   function reverseString(str) {
+     return str.split('').reverse().join('');
+   }
+   ```
+
+2. **Check for palindrome**
+   - *Determine if a string is a palindrome.*
+   ```javascript
+   function isPalindrome(str) {
+     const reversed = str.split('').reverse().join('');
+     return str === reversed;
+   }
+   ```
+
+3. **Find the largest number in an array**
+   ```javascript
+   function findMax(arr) {
+     return Math.max(...arr);
+   }
+   ```
+
+4. **FizzBuzz**
+   - *Print numbers from 1 to 100. For multiples of 3, print "Fizz", for 5 "Buzz", and for both "FizzBuzz".*
+   ```javascript
+   for (let i = 1; i <= 100; i++) {
+     let output = '';
+     if (i % 3 === 0) output += 'Fizz';
+     if (i % 5 === 0) output += 'Buzz';
+     console.log(output || i);
+   }
+   ```
+
+5. **Count vowels in a string**
+   ```javascript
+   function countVowels(str) {
+     return str.match(/[aeiou]/gi)?.length || 0;
+   }
+   ```
+
+---
+
+## 🟩 **Intermediate Programming Questions**
+
+1. **Flatten a nested array**
+   ```javascript
+   function flattenArray(arr) {
+     return arr.flat(Infinity);
+   }
+   ```
+
+2. **Debounce function**
+   - *Implement a debounce function to limit how often a function can fire.*
+   ```javascript
+   function debounce(fn, delay) {
+     let timer;
+     return function(...args) {
+       clearTimeout(timer);
+       timer = setTimeout(() => fn.apply(this, args), delay);
+     };
+   }
+   ```
+
+3. **Deep clone an object**
+   ```javascript
+   function deepClone(obj) {
+     return JSON.parse(JSON.stringify(obj));
+   }
+   ```
+
+4. **Find duplicates in an array**
+   ```javascript
+   function findDuplicates(arr) {
+     return arr.filter((item, index) => arr.indexOf(item) !== index);
+   }
+   ```
+
+5. **Implement a simple promise**
+   ```javascript
+   function asyncTask() {
+     return new Promise((resolve, reject) => {
+       setTimeout(() => resolve("Task complete"), 1000);
+     });
+   }
+
+   asyncTask().then(console.log);
+   ```
+
+---
+
+## 🟥 **Advanced Programming Questions**
+
+### 1. **Implement a recursive function to calculate factorial**
+```javascript
+function factorial(n) {
+  if (n === 0) return 1;
+  return n * factorial(n - 1);
+}
+```
+
+### 2. **Find the nth Fibonacci number using memoization**
+```javascript
+function fibonacci(n, memo = {}) {
+  if (n <= 1) return n;
+  if (memo[n]) return memo[n];
+  memo[n] = fibonacci(n - 1, memo) + fibonacci(n - 2, memo);
+  return memo[n];
+}
+```
+
+### 3. **Implement a custom `bind` function**
+```javascript
+Function.prototype.myBind = function(context, ...args) {
+  const fn = this;
+  return function(...newArgs) {
+    return fn.apply(context, [...args, ...newArgs]);
+  };
+};
+```
+
+### 4. **Throttle function**
+```javascript
+function throttle(fn, limit) {
+  let inThrottle;
+  return function(...args) {
+    if (!inThrottle) {
+      fn.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  };
+}
+```
+
+### 5. **Implement a simple event emitter**
+```javascript
+class EventEmitter {
+  constructor() {
+    this.events = {};
+  }
+
+  on(event, listener) {
+    if (!this.events[event]) this.events[event] = [];
+    this.events[event].push(listener);
+  }
+
+  emit(event, ...args) {
+    if (this.events[event]) {
+      this.events[event].forEach(listener => listener(...args));
+    }
+  }
+
+  off(event, listenerToRemove) {
+    this.events[event] = this.events[event].filter(listener => listener !== listenerToRemove);
+  }
+}
+```
+
+### 6. **Implement a deep equality check**
+```javascript
+function deepEqual(a, b) {
+  if (a === b) return true;
+  if (typeof a !== 'object' || typeof b !== 'object' || a == null || b == null) return false;
+
+  const keysA = Object.keys(a), keysB = Object.keys(b);
+  if (keysA.length !== keysB.length) return false;
+
+  for (let key of keysA) {
+    if (!keysB.includes(key) || !deepEqual(a[key], b[key])) return false;
+  }
+
+  return true;
+}
+```
+
+### 7. **Implement a promise-based retry mechanism**
+```javascript
+function retry(fn, retries = 3, delay = 1000) {
+  return new Promise((resolve, reject) => {
+    function attempt(n) {
+      fn()
+        .then(resolve)
+        .catch(err => {
+          if (n === 0) reject(err);
+          else setTimeout(() => attempt(n - 1), delay);
+        });
+    }
+    attempt(retries);
+  });
+}
+```
+
+### 8. **LRU Cache Implementation**
+```javascript
+class LRUCache {
+  constructor(limit = 5) {
+    this.cache = new Map();
+    this.limit = limit;
+  }
+
+  get(key) {
+    if (!this.cache.has(key)) return -1;
+    const value = this.cache.get(key);
+    this.cache.delete(key);
+    this.cache.set(key, value);
+    return value;
+  }
+
+  put(key, value) {
+    if (this.cache.has(key)) this.cache.delete(key);
+    else if (this.cache.size === this.limit) this.cache.delete(this.cache.keys().next().value);
+    this.cache.set(key, value);
+  }
+}
+```
+
+---
+
+
