@@ -1,4 +1,10 @@
 
+## Install dependencies
+#### Install Node
+https://nodejs.org/en/download
+#### Install websocket package
+npm install ws
+
 ## Client Side Code
 ``` Javascript
 const WebSocket = require('ws');
