@@ -18,6 +18,7 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
+let userName = '';
 
 // Listen for messages from the server
 socket.on('message', (message) => {
@@ -27,10 +28,18 @@ socket.on('message', (message) => {
 // Handle connection open
 socket.on('open', () => {
   console.log('Connected to server');
-  console.log('Type your message and press Enter to send:');
+  console.log('Please enter user name:')
+
+  
 
   // Prompt user for input and send messages to the server
   rl.on('line', (input) => {
+    if(!userName){
+      console.log(`Welcome ${input}! You can start chatting now.`);
+      userName = input;
+      console.log('Type your message and press Enter to send:');
+    }
+    input = `${userName}: ${input}`;
     socket.send(input);
   });
 });
@@ -58,7 +67,7 @@ server.on('connection', (socket) => {
   socket.on('message', (message) => {
     console.log(`Received: ${message}`);
     // Echo the message back to the client
-    socket.send(`You said: ${message}`);
+    socket.send(`Received ${message}`);
   });
 
   // Handle client disconnection
@@ -68,4 +77,5 @@ server.on('connection', (socket) => {
 });
 
 console.log('WebSocket server is running on ws://localhost:8080');
+
 ```
