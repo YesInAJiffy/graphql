@@ -1,4 +1,43 @@
 
+**WebSockets** are a communication protocol that provides **full-duplex**, **persistent** connections between a client (like a browser) and a server. Unlike HTTP, which is request-response based, WebSockets allow both sides to send and receive data **independently and continuously** over the same connection.
+
+---
+
+### 🔄 How WebSockets Work
+
+1. **Handshake**:  
+   The client initiates a WebSocket connection using an HTTP request with special headers (`Upgrade: websocket`).  
+   The server responds with `101 Switching Protocols`, confirming the upgrade.
+
+2. **Persistent Connection**:  
+   Once established, the connection stays open, allowing real-time data exchange without repeated HTTP requests.
+
+3. **Bidirectional Communication**:  
+   Both client and server can send messages at any time — ideal for chat apps, live dashboards, games, etc.
+
+---
+
+### 🧠 Key Features
+
+| Feature              | Description |
+|----------------------|-------------|
+| **Full-duplex**      | Both client and server can send/receive simultaneously. |
+| **Low latency**      | No need to re-establish connections for each message. |
+| **Efficient**        | Less overhead than HTTP polling or long-polling. |
+| **Real-time**        | Perfect for live updates, notifications, and streaming. |
+
+---
+
+### 📦 Use Cases
+
+- **Chat applications**
+- **Live sports scores**
+- **Stock market tickers**
+- **Multiplayer games**
+- **Collaborative tools (e.g., Google Docs)**
+
+
+
 ## Install dependencies
 #### Install Node
 https://nodejs.org/en/download
